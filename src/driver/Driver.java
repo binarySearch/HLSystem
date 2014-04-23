@@ -12,11 +12,22 @@ import uiComponent.StarterGUI;
  *
  * @author Armando
  */
-public class Driver {
+public class Driver implements Runnable{
     
     
     public static void main (String args[]){
-        new StarterGUI().setVisible(true);
+        StarterGUI s = new StarterGUI();
+        s.setVisible(true);
+        Thread t = new Thread();
+        
+        s.promptPass();
+        s.iterate();
+
+    }
+
+    @Override
+    public void run() {
+        System.out.println("I am running on a thread..._>");
     }
     
 }

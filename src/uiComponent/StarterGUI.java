@@ -23,7 +23,6 @@ public class StarterGUI extends javax.swing.JFrame {
     public StarterGUI() {
         initComponents();
         setProperties();
-        promptPass();
     }
 
     /**
@@ -52,7 +51,8 @@ public class StarterGUI extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jProgressBar1.setForeground(new java.awt.Color(51, 153, 0));
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, -1, -1));
+        jProgressBar1.setStringPainted(true);
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 390, -1));
 
         status.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         status.setText("Initializing...");
@@ -75,9 +75,25 @@ public class StarterGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
    
-    private void promptPass(){
-        LoginGUI prompt = new LoginGUI();
+    
+    public  void iterate(){
+        int num=0;
+        while (num < 100) {
+            jProgressBar1.setValue(num);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) { }
+            num += 95;
+        }
+    }
+    
+    public void promptPass(){
+        this.pack();
+        LoginGUI prompt = new LoginGUI();    
         prompt.setVisible(true);
+        //StarterGUI s = new StarterGUI();
+        //s.iterate();
+        //iterate();
     }
     
     private void setProperties() {
