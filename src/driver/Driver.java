@@ -6,6 +6,8 @@
 
 package driver;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uiComponent.StarterGUI;
 
 /**
@@ -14,15 +16,20 @@ import uiComponent.StarterGUI;
  */
 public class Driver {
     
-    
+    public static StarterGUI s = new StarterGUI();
     public static void main (String args[]){
-        StarterGUI s = new StarterGUI();
-        s.setVisible(true);
-        Thread t = new Thread();
         
+        s.setVisible(true);
+        Runnable threadJob = new myRunnable();
+        Thread myThread = new Thread(threadJob);
+        myThread.start();
+        try {
+            Thread.sleep((long) 1000.0);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
+        }
         s.promptPass();
-        s.iterate();
-        System.out.print("pinche marrano");
+        
     }
-    
+   
 }
