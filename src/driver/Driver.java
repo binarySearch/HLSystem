@@ -12,7 +12,7 @@ import uiComponent.StarterGUI;
  *
  * @author Armando
  */
-public class Driver implements Runnable{
+public class Driver {
     
     
     public static void main (String args[]){
@@ -23,11 +23,6 @@ public class Driver implements Runnable{
         s.promptPass();
         s.iterate();
 
-    }
-
-    @Override
-    public void run() {
-        System.out.println("I am running on a thread..._>");
     }
     
 }
