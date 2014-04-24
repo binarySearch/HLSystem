@@ -6,16 +6,19 @@
 
 package uiComponent;
 
+import static driver.Driver.s;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static uiComponent.LoginGUI.flag;
 
 /**
  *
  * @author Armando
  */
 public class StarterGUI extends javax.swing.JFrame {
+    public static boolean progressFlag=false;
 
     /**
      * Creates new form StarterGUI
@@ -76,24 +79,40 @@ public class StarterGUI extends javax.swing.JFrame {
      */
    
     
-    public  void iterate(){
-        int num=0;
-        while (num < 100) {
-            jProgressBar1.setValue(num);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) { }
-            num += 95;
-        }
+    public  void iterate()
+    {
+            int num=0;
+            while (num <= 1000) {
+                
+                jProgressBar1.setValue(num/10);
+                if (num < 200)
+                { 
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) { }
+                    num += 1;                    
+                }
+                else 
+                { 
+                    //if access granted
+                    if(flag)
+                    {//System.out.println("flag is true");
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) { }
+                        num += 1;                                     
+                    }
+
+                }
+
+            }
+            progressFlag=true;
     }
     
     public void promptPass(){
         this.pack();
         LoginGUI prompt = new LoginGUI();    
         prompt.setVisible(true);
-        //StarterGUI s = new StarterGUI();
-        //s.iterate();
-        //iterate();
     }
     
     private void setProperties() {

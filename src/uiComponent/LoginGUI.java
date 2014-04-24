@@ -8,6 +8,8 @@ package uiComponent;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -17,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class LoginGUI extends javax.swing.JFrame {
 
+    public static boolean flag = false;
     /**
      * Creates new form LoginGUI
      */
@@ -166,23 +169,47 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel?", "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (choice==JOptionPane.YES_OPTION) {
+            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel?", 
+                    "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (choice==JOptionPane.YES_OPTION)
                  System.exit(0);
-            }
- 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void validateUser(String name, String pass){
         String correctName = "Sergio";
         String correctPassword = "6c6f75";
         
-        if (name.equals(correctName.toLowerCase())&&pass.equals(correctPassword)) {
-            new MainMenuGUI().setVisible(true);
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "the user " + name + " is not recognized.\ntry again or enter your password again", "Attention", JOptionPane.WARNING_MESSAGE);
+        //access granted
+        if (name.equals(correctName.toLowerCase())&&pass.equals(correctPassword)) 
+        {
+            flag=true;
+            try {
+                while (true) 
+                {
+                    System.out.println("while true...");
+                    if (StarterGUI.progressFlag) {
+                        System.out.println("progress flag true...");
+                        //Thread.sleep(1000);  
+                        this.dispose();
+                        new MainMenuGUI().setVisible(true); 
+                        break;
+                    }else
+                        break;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        
+        //access denied
+        }else
+        {
+            JOptionPane.showMessageDialog(this, "the user " + name + 
+                    " is not recognized.\ntry again or enter your password again", 
+                    "Attention", JOptionPane.WARNING_MESSAGE);
         }
+        
     }
     /**
      * @param args the command line arguments
