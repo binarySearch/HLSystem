@@ -107,6 +107,7 @@ public class StarterGUI extends javax.swing.JFrame {
 
             }
             progressFlag=true;
+            LoginGUI.pause();
     }
     
     public void promptPass(){

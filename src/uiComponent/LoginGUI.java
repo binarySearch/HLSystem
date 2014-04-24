@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class LoginGUI extends javax.swing.JFrame {
 
     public static boolean flag = false;
+    static int a=0;
     /**
      * Creates new form LoginGUI
      */
@@ -174,24 +175,19 @@ public class LoginGUI extends javax.swing.JFrame {
             if (choice==JOptionPane.YES_OPTION)
                  System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void validateUser(String name, String pass){
-        String correctName = "Sergio";
-        String correctPassword = "6c6f75";
-        
-        //access granted
-        if (name.equals(correctName.toLowerCase())&&pass.equals(correctPassword)) 
-        {
-            flag=true;
+    
+    public static void pause()
+    {   
+        flag=true;
             try {
                 while (true) 
                 {
                     System.out.println("while true...");
+                    a++;
+                    Thread.sleep(100);
                     if (StarterGUI.progressFlag) {
                         System.out.println("progress flag true...");
-                        //Thread.sleep(1000);  
-                        this.dispose();
-                        new MainMenuGUI().setVisible(true); 
+                        new MainMenuGUI().setVisible(true);
                         break;
                     }else
                         break;
@@ -199,9 +195,17 @@ public class LoginGUI extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
+    }
         
+    private void validateUser(String name, String pass){
+        String correctName = "Sergio";
+        String correctPassword = "6c6f75";
+        
+        //access granted
+        if (name.equals(correctName.toLowerCase())&&pass.equals(correctPassword)) 
+        {
+            System.out.println("before pause");
+            pause();
         //access denied
         }else
         {
