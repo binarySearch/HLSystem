@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
  */
 public class AdderGUI extends javax.swing.JFrame {
 
-    private int type = 0;
+    private int type=0;
     /**
      * Creates new form AdderGUI
      * @param type = type of window to display: 1. for new user 2. for new client 4. for new ballroom
@@ -29,62 +29,54 @@ public class AdderGUI extends javax.swing.JFrame {
     }
     
     private void setWindowComponents(int type){//receives int as a parameter to take a decision of the window type
-        if(type != 1){
-            if(type == 2){//the type 2* new client window
+        
+        switch(type)
+        {
+            case 1:
+                newUserWindow();
+                break;
+            case 2:
                 newClientWindow();
-                initNewClientComponents();
-            }
-            else{//the type 3* new ballroom window
+                break;
+            case 3:
                 newBallroomWindow();
-                initNewBallroomComponents();
-            }
+                break;
+            default:
+                break;
         }
-        else{//the type 1* new user account window
-            newUserWindow();
-            initNewUserComponents();
-        }
+        
     }
     
     private void newUserWindow(){//set the properties for user window type
-        this.setTitle("Create new user account");
+        this.setTitle("Crear nueva cuenta");
+        this.setTitle("Agregar a nuevo cliente");
+        this.jLabel1.setText("Nombre");
+        this.jTextField1.setToolTipText("Nombre completo");
+        this.jLabel2.setText("Nombre de usuario");
+        this.jTextField2.setToolTipText("Este es el nombre con el que este usuario iniciará sesión");
+        this.jLabel3.setText("Contraseña");
+        this.jLabel4.setText("Agregar a un nuevo usuario");
+        
     }
     
     private void newClientWindow(){//set the properties for client window type
-        this.setTitle("Add new client");
-    }
-    
-    private void newBallroomWindow(){//set the properties for ballroom window type
-        this.setTitle("Add new ballroom");
-    }
-
-    //--------------------------------------------------------
-    //type = 1
-    private void initNewUserComponents() {
-        this.jLabel1.setText("Nombre");
-        this.jLabel1.setToolTipText("Nombre completo");
-        this.jLabel2.setText("Nombre de usuario");
-        this.jLabel2.setToolTipText("Este es el nombre con el que este usuario iniciará sesión");
-        this.jLabel3.setText("Contraseña");
-        this.jLabel4.setText("Agregar a un nuevo usuario");
-    }
-        //type = 2
-    private void initNewClientComponents() {
+        this.setTitle("Agregar nuevo salón");
         this.jLabel1.setText("Nombre del cliente");
-        this.jLabel1.setToolTipText("Nombre completo");
+        this.jTextField1.setToolTipText("Nombre completo");
         this.jLabel2.setText("Número de teléfono");
         //this.jLabel2.setToolTipText("");
         this.jLabel3.setText("Correo electrónico");
-        this.jLabel4.setText("Agregar a un nuevo cliente");        
+        this.jLabel4.setText("Agregar a un nuevo cliente");      
     }
-    //type = 3
-    private void initNewBallroomComponents() {
+    
+    private void newBallroomWindow(){//set the properties for ballroom window type   
         this.jLabel1.setText("Nombre del salón");
         this.jLabel2.setText("Dirección");
         this.jLabel3.setVisible(false);
         this.jTextField3.setVisible(false);
-        this.jLabel4.setText("Agregar nuevo salón");        
+        this.jLabel4.setText("Agregar nuevo salón");  
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,23 +98,22 @@ public class AdderGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(400, 450));
         setMinimumSize(new java.awt.Dimension(400, 450));
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
 
         jTextField1.setBackground(new java.awt.Color(102, 102, 102));
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("jTextField1");
 
         jTextField2.setBackground(new java.awt.Color(102, 102, 102));
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("jTextField2");
 
         jTextField3.setBackground(new java.awt.Color(102, 102, 102));
         jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setText("jTextField3");
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,7 +127,7 @@ public class AdderGUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("jLabel3");
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("jLabel4");
 
@@ -152,18 +143,22 @@ public class AdderGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(56, 56, 56)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                                    .addComponent(jTextField2))))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -185,7 +180,7 @@ public class AdderGUI extends javax.swing.JFrame {
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jButton1)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -214,18 +209,15 @@ public class AdderGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            String param1 = jTextField1.getText();
+            String param2 = jTextField2.getText();
+            String param3 = jTextField3.getText();
         switch(this.type)
         {
             case 1:
-                String name     = jTextField1.getText();
-                String userName = jTextField2.getText();
-                String password = jTextField3.getText();
             break;
                 
             case 2:
-                String nameClient   = jTextField1.getText();
-                String phone        = jTextField2.getText();
-                String email        = jTextField3.getText();
             break;
                 
             case 3:
