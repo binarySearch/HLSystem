@@ -54,7 +54,7 @@ public class StarterGUI extends javax.swing.JFrame {
         setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jProgressBar1.setForeground(new java.awt.Color(230, 76, 4));
+        jProgressBar1.setForeground(new java.awt.Color(255, 153, 0));
         jProgressBar1.setStringPainted(true);
         getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 423, 260, -1));
 
@@ -67,7 +67,7 @@ public class StarterGUI extends javax.swing.JFrame {
         getContentPane().add(version, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/hl logo trans 600x600.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 460));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/BG.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 460));
