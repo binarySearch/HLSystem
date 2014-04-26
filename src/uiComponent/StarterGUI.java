@@ -6,26 +6,28 @@
 
 package uiComponent;
 
-import static driver.Driver.s;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static uiComponent.LoginGUI.flag;
+import javax.swing.JProgressBar;
 
 /**
  *
  * @author Armando
  */
 public class StarterGUI extends javax.swing.JFrame {
-    public static boolean progressFlag=false;
-
+    
     /**
      * Creates new form StarterGUI
      */
+    public static boolean Access = false;
+    
     public StarterGUI() {
         initComponents();
         setProperties();
+        fillBar();//waits forthe user access to start loading the progress bar 
+        promptPass();
     }
 
     /**
@@ -43,9 +45,8 @@ public class StarterGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("HL Manager");
-        setAutoRequestFocus(false);
         setMaximumSize(new java.awt.Dimension(600, 450));
         setMinimumSize(new java.awt.Dimension(600, 450));
         setUndecorated(true);
@@ -53,17 +54,17 @@ public class StarterGUI extends javax.swing.JFrame {
         setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jProgressBar1.setForeground(new java.awt.Color(51, 153, 0));
+        jProgressBar1.setForeground(new java.awt.Color(230, 76, 4));
         jProgressBar1.setStringPainted(true);
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 390, -1));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 423, 260, -1));
 
         status.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        status.setText("Initializing...");
-        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        status.setText("Prompting Password...");
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, 20));
 
         version.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         version.setText("v1.0");
-        getContentPane().add(version, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 420, -1, -1));
+        getContentPane().add(version, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/hl logo trans 600x600.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 470));
@@ -77,44 +78,20 @@ public class StarterGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    private void promptPass(){
+        new Thread(new TempoPrompting()).start();
+    }
+    
+    private void fillBar(){
+        new Thread(new TempoFilling()).start();
+    }
+    
+    private void disposeWin(){
+        this.dispose();
+    }
+    
    
-    
-    public  void iterate()
-    {
-            int num=0;
-            while (num <= 1000) {
-                
-                jProgressBar1.setValue(num/10);
-                if (num < 200)
-                { 
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) { }
-                    num += 1;                    
-                }
-                else 
-                { 
-                    //if access granted
-                    if(flag)
-                    {//System.out.println("flag is true");
-                        try {
-                            Thread.sleep(10);
-                        } catch (InterruptedException e) { }
-                        num += 1;                                     
-                    }
-
-                }
-
-            }
-            progressFlag=true;
-            LoginGUI.pause();
-    }
-    
-    public void promptPass(){
-        this.pack();
-        LoginGUI prompt = new LoginGUI();    
-        prompt.setVisible(true);
-    }
     
     private void setProperties() {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -125,8 +102,67 @@ public class StarterGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JProgressBar jProgressBar1;
+    public javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel status;
     private javax.swing.JLabel version;
     // End of variables declaration//GEN-END:variables
+   
+    class TempoPrompting implements Runnable{
+
+        @Override
+        public void run() {
+            for(int i = 0; i < 50; i ++){
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(StarterGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            new LoginGUI().setVisible(true);
+        }
+        
+    }
+    
+    class TempoLastDelay implements Runnable{
+
+        @Override
+        public void run() {
+            for(int i = 0; i < 50; i ++){
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(StarterGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            disposeWin();
+        }
+        
+    }
+    
+    class TempoFilling implements Runnable{
+        
+        @Override
+        public void run() {
+            while(Access == false){
+                //waits intul changes to different state
+                System.out.print(".");
+            }
+            
+            status.setText("Connecting... Please Wait");
+            
+            for(int i = 0; i <= 100; i ++){
+                    try {
+                        jProgressBar1.setValue(i);
+                        jProgressBar1.repaint();
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(StarterGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                new Thread(new TempoLastDelay()).start();
+            
+        }
+        
+    }
+    
 }

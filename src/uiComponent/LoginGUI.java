@@ -12,23 +12,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import uiComponent.StarterGUI.TempoFilling;
 
 /**
  *
  * @author Armando
  */
 public class LoginGUI extends javax.swing.JFrame {
-
-    public static boolean flag = false;
-    static int a=0;
     /**
      * Creates new form LoginGUI
+     * 
      */
+   
+    
     public LoginGUI() {
         initComponents();
         setProperties();
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-   
     }
 
     /**
@@ -49,7 +48,7 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Account Validation");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -172,49 +171,35 @@ public class LoginGUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel?", 
                     "Attention", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (choice==JOptionPane.YES_OPTION)
+            if (choice == JOptionPane.YES_OPTION)
                  System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    public static void pause()
-    {   
-        flag=true;
-            try {
-                while (true) 
-                {
-                    System.out.println("while true...");
-                    a++;
-                    Thread.sleep(100);
-                    if (StarterGUI.progressFlag) {
-                        System.out.println("progress flag true...");
-                        new MainMenuGUI().setVisible(true);
-                        break;
-                    }else
-                        break;
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
-        
+      
     private void validateUser(String name, String pass){
-        String correctName = "Sergio";
-        String correctPassword = "6c6f75";
+        String correctName = "q";
+        String correctPassword = "q";
         
-        //access granted
-        if (name.equals(correctName.toLowerCase())&&pass.equals(correctPassword)) 
+        if (name.equals(correctName.toLowerCase()) && pass.equals(correctPassword)) //access granted
         {
             System.out.println("before pause");
-            pause();
+            StarterGUI.Access = true;
+            this.dispose();//close this window first 
         //access denied
-        }else
-        {
+        }
+        else{
             JOptionPane.showMessageDialog(this, "the user " + name + 
                     " is not recognized.\ntry again or enter your password again", 
                     "Attention", JOptionPane.WARNING_MESSAGE);
         }
         
     }
+    
+    private void setProperties() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setIconImage(new ImageIcon(getClass().getResource("/sources" + "/logo180.png")).getImage());
+    }
+    
     /**
      * @param args the command line arguments
      */  
@@ -230,9 +215,5 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 
-    private void setProperties() {
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        this.setIconImage(new ImageIcon(getClass().getResource("/sources" + "/logo180.png")).getImage());
-    }
+    
 }

@@ -16,20 +16,9 @@ import uiComponent.StarterGUI;
  */
 public class Driver {
     
-    public static StarterGUI s = new StarterGUI();
+    
     public static void main (String args[]){
-        
-        s.setVisible(true);
-        Runnable threadJob = new myRunnable();
-        Thread myThread = new Thread(threadJob);
-        myThread.start();
-        try {
-            Thread.sleep((long) 1000.0);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        s.promptPass();
-        
+        new StarterGUI().setVisible(true);
     }
    
 }
