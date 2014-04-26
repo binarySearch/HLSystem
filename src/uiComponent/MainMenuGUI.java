@@ -8,13 +8,13 @@ package uiComponent;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.List;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -335,17 +335,8 @@ public class MainMenuGUI extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try { 
-            setLabelName(1);
-            deleteComponents();
-            Object[] components = new NewEventGUI().jPanel1.getComponents();
-                for(int i = 0 ; i < new NewEventGUI().jPanel1.getComponentCount(); i ++ ){
-                    jPanel2.add((Component) components[i],i);
-                }
-                requestFocusComponents();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainMenuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setLabelName(1);
+        loadComponents();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -367,6 +358,7 @@ public class MainMenuGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         setLabelName(2);
         deleteComponents();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
@@ -376,6 +368,26 @@ public class MainMenuGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    private void loadComponents(){
+        ArrayList<Component> extPanel = getCompList(new NewEventGUI().jPanel1);
+        int current = 0;
+        for(Component comp : extPanel ){
+                jPanel2.add(extPanel.get(current));
+                current++;
+        }
+        jPanel2.updateUI();//updates the added components
+    }
+    
+    private ArrayList<Component> getCompList(JPanel panel){
+        ArrayList<Component> comList = new ArrayList<>();
+        
+        for(int i = 0; i < panel.getComponentCount(); i++){
+            comList.add(panel.getComponent(i));
+            System.out.print("Component number: " + i);
+        }
+        return comList;
+    }
     
     private void deleteComponents(){
         for(int i = 0 ; i < this.jPanel2.getComponentCount(); i++){
