@@ -10,7 +10,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JProgressBar;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -96,7 +96,7 @@ public class StarterGUI extends javax.swing.JFrame {
     private void setProperties() {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        //setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("login-1-512 orange.png")));
+        this.setIconImage(new ImageIcon(getClass().getResource("/sources" + "/LOGO180X180.png")).getImage());
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -135,6 +135,7 @@ public class StarterGUI extends javax.swing.JFrame {
                 }
             }
             disposeWin();
+            new MainMenuGUI().setVisible(true);
         }
         
     }

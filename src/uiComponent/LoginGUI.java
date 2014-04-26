@@ -8,11 +8,8 @@ package uiComponent;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import uiComponent.StarterGUI.TempoFilling;
 
 /**
  *

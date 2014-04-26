@@ -6,8 +6,6 @@
 
 package driver;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import uiComponent.StarterGUI;
 
 /**
