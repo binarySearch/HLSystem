@@ -35,12 +35,14 @@ public class InventoryGUI extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("HL_EventosPU").createEntityManager();
-        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Products p");
+        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT c, p FROM Products p, Categories c ");
         list1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query1.getResultList());
         query2 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT c.category FROM Categories c ORDER BY c.category");
         list2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query2.getResultList());
         query3 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT b.brandName FROM Brands b ORDER BY b.brandName\n");
         list3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query3.getResultList());
+        productsQuery = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Products p");
+        productsList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -68,6 +70,27 @@ public class InventoryGUI extends javax.swing.JFrame {
         jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${categoryId}"));
+        columnBinding.setColumnName("Category Id");
+        columnBinding.setColumnClass(inventoryComponent.Categories.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${brandId}"));
+        columnBinding.setColumnName("Brand Id");
+        columnBinding.setColumnClass(inventoryComponent.Brands.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${brandModel}"));
+        columnBinding.setColumnName("Brand Model");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+        columnBinding.setColumnName("Description");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productId}"));
+        columnBinding.setColumnName("Product Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantity}"));
+        columnBinding.setColumnName("Quantity");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rentingPrice}"));
+        columnBinding.setColumnName("Renting Price");
+        columnBinding.setColumnClass(java.math.BigDecimal.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -254,6 +277,8 @@ public class InventoryGUI extends javax.swing.JFrame {
     private java.util.List<Products> list1;
     private java.util.List<Categories> list2;
     private java.util.List<Brands> list3;
+    private java.util.List<inventoryComponent.Products> productsList;
+    private javax.persistence.Query productsQuery;
     private javax.persistence.Query query1;
     private javax.persistence.Query query2;
     private javax.persistence.Query query3;

@@ -6,8 +6,11 @@
 
 package uiComponent;
 
+import com.sun.awt.AWTUtilities;
 import java.awt.Dimension;
+import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -42,35 +45,35 @@ public class StarterGUI extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         status = new javax.swing.JLabel();
         version = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("HL Manager");
-        setMaximumSize(new java.awt.Dimension(600, 450));
-        setMinimumSize(new java.awt.Dimension(600, 450));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(355, 351));
+        setMinimumSize(new java.awt.Dimension(355, 351));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(600, 450));
+        setPreferredSize(new java.awt.Dimension(355, 351));
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jProgressBar1.setForeground(new java.awt.Color(255, 153, 0));
+        jProgressBar1.setForeground(new java.awt.Color(230, 76, 4));
         jProgressBar1.setStringPainted(true);
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 423, 260, -1));
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 160, -1));
 
         status.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         status.setText("Prompting Password...");
-        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, 20));
+        getContentPane().add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 160, 20));
 
         version.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         version.setText("v1.0");
-        getContentPane().add(version, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, -1, -1));
+        getContentPane().add(version, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 30, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/hl logo trans 600x600.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 460));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/BG.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 460));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/Starter.png"))); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 510, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,11 +100,16 @@ public class StarterGUI extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.setIconImage(new ImageIcon(getClass().getResource("/sources" + "/LOGO180X180.png")).getImage());
+        Shape shape = new RoundRectangle2D.Float(1, 5, 350, 338, 90, 210);
+        AWTUtilities.setWindowShape(this, shape);
+        
    }
+    
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     public javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel status;
     private javax.swing.JLabel version;

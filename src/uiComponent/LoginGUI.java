@@ -45,14 +45,12 @@ public class LoginGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Account Validation");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 0, 0));
         setFocusTraversalPolicyProvider(true);
-        setMaximumSize(new java.awt.Dimension(350, 150));
         setMinimumSize(new java.awt.Dimension(350, 150));
-        setPreferredSize(new java.awt.Dimension(380, 180));
         setResizable(false);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(350, 150));
