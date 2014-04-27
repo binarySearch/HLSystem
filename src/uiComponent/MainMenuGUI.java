@@ -6,14 +6,11 @@
 
 package uiComponent;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.List;
 import java.awt.Toolkit;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -53,6 +50,7 @@ public class MainMenuGUI extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,6 +65,8 @@ public class MainMenuGUI extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal - HL Eventos");
@@ -164,20 +164,25 @@ public class MainMenuGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMaximumSize(new java.awt.Dimension(1013, 662));
         jPanel2.setMinimumSize(new java.awt.Dimension(1013, 662));
         jPanel2.setPreferredSize(new java.awt.Dimension(1013, 662));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sources/hl logo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(230, 76, 4));
@@ -282,6 +287,13 @@ public class MainMenuGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Herramientas");
+
+        jMenuItem7.setText("Revisión Semanal (WRR)");
+        jMenu3.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -336,28 +348,23 @@ public class MainMenuGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setLabelName(1);
-        loadComponents();
+        refreshPanel();
+        loadComponents(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try {    
-            setLabelName(3);
-            deleteComponents();
-            Object[] components = new InventoryGUI().jPanel1.getComponents();
-                for(int i = 0 ; i < components.length; i ++ ){
-                    jPanel2.add((Component) components[i],i);
-                }
-                requestFocusComponents();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainMenuGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setLabelName(3);
+        refreshPanel();
+        loadComponents(3);
+          
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         setLabelName(2);
-        deleteComponents();
+        refreshPanel();
+        loadComponents(2);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -369,9 +376,24 @@ public class MainMenuGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    private void loadComponents(){
-        ArrayList<Component> extPanel = getCompList(new NewEventGUI().jPanel1);
+    private void loadComponents(int window){
+        ArrayList<Component> extPanel = null;
         int current = 0;
+        
+        switch(window){
+            case 1:
+                extPanel = getCompList(new NewEventGUI().jPanel1);
+                break;
+            case 2:
+                extPanel = getCompList(new EventsGUI().jPanel1);
+                break;
+            case 3:
+                extPanel = getCompList(new InventoryGUI().jPanel1);
+                break;
+                
+             
+        }
+        
         for(Component comp : extPanel ){
                 jPanel2.add(extPanel.get(current));
                 current++;
@@ -379,34 +401,18 @@ public class MainMenuGUI extends javax.swing.JFrame {
         jPanel2.updateUI();//updates the added components
     }
     
+    private void refreshPanel(){
+        jPanel2.removeAll();
+    }
+    
     private ArrayList<Component> getCompList(JPanel panel){
         ArrayList<Component> comList = new ArrayList<>();
         
         for(int i = 0; i < panel.getComponentCount(); i++){
             comList.add(panel.getComponent(i));
-            System.out.print("Component number: " + i);
+            //System.out.print("Component number: " + i);
         }
         return comList;
-    }
-    
-    private void deleteComponents(){
-        for(int i = 0 ; i < this.jPanel2.getComponentCount(); i++){
-            //this.jPanel2.remove(jPanel2.getComponent(i));
-            this.jPanel2.getComponent(i).setVisible(false);
-        }
-    }
-    
-    private void requestFocusComponents(){
-        for(int i = 0 ; i < this.jPanel2.getComponentCount(); i++){
-            //this.jPanel2.remove(jPanel2.getComponent(i));
-            this.jPanel2.getComponent(i).requestFocus();
-        }
-    }
-    
-    private void setProperties() {
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        this.setIconImage(new ImageIcon(getClass().getResource("/sources" + "/LOGO180X180.png")).getImage());
     }
     
     private void setLabelName(int button){
@@ -428,6 +434,13 @@ public class MainMenuGUI extends javax.swing.JFrame {
         }
         
         jLabel9.setText(labelName);
+        jPanel2.setBackground(jPanel1.getBackground());
+    }
+    
+    private void setProperties() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setIconImage(new ImageIcon(getClass().getResource("/sources" + "/LOGO180X180.png")).getImage());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -436,6 +449,7 @@ public class MainMenuGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -443,6 +457,7 @@ public class MainMenuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -450,6 +465,7 @@ public class MainMenuGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

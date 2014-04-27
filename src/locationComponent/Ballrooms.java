@@ -7,6 +7,8 @@
 package locationComponent;
 
 import eventComponent.Events;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -20,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,6 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ballrooms.findByBallroomName", query = "SELECT b FROM Ballrooms b WHERE b.ballroomName = :ballroomName"),
     @NamedQuery(name = "Ballrooms.findByAddress", query = "SELECT b FROM Ballrooms b WHERE b.address = :address")})
 public class Ballrooms implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ballroomId")
     private Collection<Events> eventsCollection;
     private static final long serialVersionUID = 1L;
@@ -67,7 +72,9 @@ public class Ballrooms implements Serializable {
     }
 
     public void setBallroomId(Integer ballroomId) {
+        Integer oldBallroomId = this.ballroomId;
         this.ballroomId = ballroomId;
+        changeSupport.firePropertyChange("ballroomId", oldBallroomId, ballroomId);
     }
 
     public String getBallroomName() {
@@ -75,7 +82,9 @@ public class Ballrooms implements Serializable {
     }
 
     public void setBallroomName(String ballroomName) {
+        String oldBallroomName = this.ballroomName;
         this.ballroomName = ballroomName;
+        changeSupport.firePropertyChange("ballroomName", oldBallroomName, ballroomName);
     }
 
     public String getAddress() {
@@ -83,7 +92,9 @@ public class Ballrooms implements Serializable {
     }
 
     public void setAddress(String address) {
+        String oldAddress = this.address;
         this.address = address;
+        changeSupport.firePropertyChange("address", oldAddress, address);
     }
 
     @Override
@@ -118,6 +129,14 @@ public class Ballrooms implements Serializable {
 
     public void setEventsCollection(Collection<Events> eventsCollection) {
         this.eventsCollection = eventsCollection;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
