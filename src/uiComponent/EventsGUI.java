@@ -54,7 +54,6 @@ public class EventsGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1015, 670));
         setMinimumSize(new java.awt.Dimension(1015, 670));
-        setPreferredSize(new java.awt.Dimension(1015, 670));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setMaximumSize(new java.awt.Dimension(1015, 670));

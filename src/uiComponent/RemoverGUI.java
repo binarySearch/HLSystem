@@ -124,6 +124,7 @@ public class RemoverGUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         jButton1.setText("Guardar cambios y salir");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

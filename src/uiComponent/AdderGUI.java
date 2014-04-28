@@ -108,12 +108,21 @@ public class AdderGUI extends javax.swing.JFrame {
 
         jTextField1.setBackground(new java.awt.Color(102, 102, 102));
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField1.setCaretColor(new java.awt.Color(255, 102, 0));
+        jTextField1.setSelectedTextColor(new java.awt.Color(255, 102, 0));
+        jTextField1.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jTextField2.setBackground(new java.awt.Color(102, 102, 102));
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField2.setCaretColor(new java.awt.Color(255, 102, 0));
+        jTextField2.setSelectedTextColor(new java.awt.Color(255, 102, 0));
+        jTextField2.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jTextField3.setBackground(new java.awt.Color(102, 102, 102));
         jTextField3.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField3.setCaretColor(new java.awt.Color(255, 102, 0));
+        jTextField3.setSelectedTextColor(new java.awt.Color(255, 102, 0));
+        jTextField3.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,6 +141,7 @@ public class AdderGUI extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         jButton1.setText("Agregar");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
