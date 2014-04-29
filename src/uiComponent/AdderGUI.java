@@ -48,8 +48,8 @@ public class AdderGUI extends javax.swing.JFrame {
     }
     
     private void newUserWindow(){//set the properties for user window type
-        this.setTitle("Crear nueva cuenta");
-        this.setTitle("Agregar a nuevo cliente");
+        this.setTitle("Nueva cuenta");
+        this.setTitle("Agregar a nuevo usuario");
         this.jLabel1.setText("Nombre");
         this.jTextField1.setToolTipText("Nombre completo");
         this.jLabel2.setText("Nombre de usuario");
@@ -60,7 +60,7 @@ public class AdderGUI extends javax.swing.JFrame {
     }
     
     private void newClientWindow(){//set the properties for client window type
-        this.setTitle("Agregar nuevo salón");
+        this.setTitle("Nuevo cliente");
         this.jLabel1.setText("Nombre del cliente");
         this.jTextField1.setToolTipText("Nombre completo");
         this.jLabel2.setText("Número de teléfono");
@@ -70,6 +70,7 @@ public class AdderGUI extends javax.swing.JFrame {
     }
     
     private void newBallroomWindow(){//set the properties for ballroom window type   
+        this.setTitle("Nuevo salón");
         this.jLabel1.setText("Nombre del salón");
         this.jLabel2.setText("Dirección");
         this.jLabel3.setVisible(false);
