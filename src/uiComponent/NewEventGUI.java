@@ -93,7 +93,7 @@ public class NewEventGUI extends javax.swing.JFrame {
 
         Info.setBackground(new java.awt.Color(51, 51, 51));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Miguel Laure", "Armando Molina", "Julio Garduño", "Carlos Ordones", "Sergio Pimienta", "Erick Gutierrez" }));
         jComboBox1.setToolTipText("Selecciona un cliente");
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +102,7 @@ public class NewEventGUI extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fiesta Guadalajara", "Bugas", "Country", "Benavento", "Torreza", "Expo Guadalajara" }));
         jComboBox2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
