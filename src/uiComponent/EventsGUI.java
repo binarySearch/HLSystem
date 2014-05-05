@@ -264,54 +264,29 @@ public class EventsGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        /* try {
-            Object[]product = new Inventory().getProductDetails(jTable1.getValueAt(row,0).toString(),jTable1.getValueAt(row,1).toString(),jTable1.getValueAt(row, 2).toString());
-            new AddRemoveProductsGUI(product).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+       
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        /* try {
-            Object[]product = new Inventory().getProductDetails(jTable1.getValueAt(row,0).toString(),jTable1.getValueAt(row,1).toString(),jTable1.getValueAt(row, 2).toString());
-            new AddRemoveProductsGUI(product).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        /* try {
-            // TODO add your handling code here: returns the principal table with all the products
-            this.jTable1.setModel(new Inventory().refreshInventory());
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        /* try {
-            // TODO add your handling code here: returns the table with the selected category products
-            String category = jComboBox1.getSelectedItem().toString();
-            jTable1.setModel(new Inventory().categoryTable(category));
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        /*try {
-            // TODO add your handling code here: returns the table with the selcted brand products
-            String brand = jComboBox2.getSelectedItem().toString();
-            jTable1.setModel(new Inventory().brandTable(brand));
-        } catch (SQLException ex) {
-            Logger.getLogger(InventoryGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+       // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
@@ -325,37 +300,7 @@ public class EventsGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EventsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EventsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EventsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EventsGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EventsGUI().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager1;
