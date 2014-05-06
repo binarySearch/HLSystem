@@ -9,8 +9,10 @@ package eventComponent;
 import clientComponent.Customers;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +22,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import locationComponent.Ballrooms;
 import userComponent.Users;
 
@@ -42,7 +46,9 @@ import userComponent.Users;
     @NamedQuery(name = "Events.findByDescription", query = "SELECT e FROM Events e WHERE e.description = :description"),
     @NamedQuery(name = "Events.findByTotalDue", query = "SELECT e FROM Events e WHERE e.totalDue = :totalDue"),
     @NamedQuery(name = "Events.findByAddress", query = "SELECT e FROM Events e WHERE e.address = :address"),
-    @NamedQuery(name = "Events.findByEventTime", query = "SELECT e FROM Events e WHERE e.eventTime = :eventTime")})
+    @NamedQuery(name = "Events.findByEventTime", query = "SELECT e FROM Events e WHERE e.eventTime = :eventTime"),
+    @NamedQuery(name = "Events.getEventsTableByDate", query = "SELECT e.customerId.customerName, e.description, e.ballroomId.ballroomName, e.eventDate, e.totalDue, e.userId.name FROM Events e WHERE e.eventDate <= :dateEv"),
+    @NamedQuery(name = "Events.getEventsTable", query = "SELECT e.customerId.customerName, e.description, e.ballroomId.ballroomName, e.eventDate, e.totalDue, e.userId.name FROM Events e")})
 public class Events implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -76,6 +82,8 @@ public class Events implements Serializable {
     @JoinColumn(name = "Customer_Id", referencedColumnName = "Customer_Id")
     @ManyToOne(optional = false)
     private Customers customerId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
+    private Collection<EventMaterial> eventMaterialCollection;
 
     public Events() {
     }
@@ -168,6 +176,15 @@ public class Events implements Serializable {
 
     public void setCustomerId(Customers customerId) {
         this.customerId = customerId;
+    }
+
+    @XmlTransient
+    public Collection<EventMaterial> getEventMaterialCollection() {
+        return eventMaterialCollection;
+    }
+
+    public void setEventMaterialCollection(Collection<EventMaterial> eventMaterialCollection) {
+        this.eventMaterialCollection = eventMaterialCollection;
     }
 
     @Override

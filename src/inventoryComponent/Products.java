@@ -6,11 +6,12 @@
 
 package inventoryComponent;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import eventComponent.EventMaterial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +21,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,10 +39,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Products.findByBrandModel", query = "SELECT p FROM Products p WHERE p.brandModel = :brandModel"),
     @NamedQuery(name = "Products.findByDescription", query = "SELECT p FROM Products p WHERE p.description = :description"),
     @NamedQuery(name = "Products.findByRentingPrice", query = "SELECT p FROM Products p WHERE p.rentingPrice = :rentingPrice"),
-    @NamedQuery(name = "Products.findByQuantity", query = "SELECT p FROM Products p WHERE p.quantity = :quantity")})
+    @NamedQuery(name = "Products.findByQuantity", query = "SELECT p FROM Products p WHERE p.quantity = :quantity"),
+    @NamedQuery(name = "Products.getProductsTable", query = "SELECT p.categoryId.category, p.brandId.brandName, p.brandModel, p.quantity, p.rentingPrice, p.description FROM Products p ORDER BY p.categoryId.category")})
 public class Products implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private Collection<EventMaterial> eventMaterialCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,9 +86,7 @@ public class Products implements Serializable {
     }
 
     public void setProductId(Integer productId) {
-        Integer oldProductId = this.productId;
         this.productId = productId;
-        changeSupport.firePropertyChange("productId", oldProductId, productId);
     }
 
     public String getBrandModel() {
@@ -93,9 +94,7 @@ public class Products implements Serializable {
     }
 
     public void setBrandModel(String brandModel) {
-        String oldBrandModel = this.brandModel;
         this.brandModel = brandModel;
-        changeSupport.firePropertyChange("brandModel", oldBrandModel, brandModel);
     }
 
     public String getDescription() {
@@ -103,9 +102,7 @@ public class Products implements Serializable {
     }
 
     public void setDescription(String description) {
-        String oldDescription = this.description;
         this.description = description;
-        changeSupport.firePropertyChange("description", oldDescription, description);
     }
 
     public BigDecimal getRentingPrice() {
@@ -113,9 +110,7 @@ public class Products implements Serializable {
     }
 
     public void setRentingPrice(BigDecimal rentingPrice) {
-        BigDecimal oldRentingPrice = this.rentingPrice;
         this.rentingPrice = rentingPrice;
-        changeSupport.firePropertyChange("rentingPrice", oldRentingPrice, rentingPrice);
     }
 
     public int getQuantity() {
@@ -123,9 +118,7 @@ public class Products implements Serializable {
     }
 
     public void setQuantity(int quantity) {
-        int oldQuantity = this.quantity;
         this.quantity = quantity;
-        changeSupport.firePropertyChange("quantity", oldQuantity, quantity);
     }
 
     public Brands getBrandId() {
@@ -133,9 +126,7 @@ public class Products implements Serializable {
     }
 
     public void setBrandId(Brands brandId) {
-        Brands oldBrandId = this.brandId;
         this.brandId = brandId;
-        changeSupport.firePropertyChange("brandId", oldBrandId, brandId);
     }
 
     public Categories getCategoryId() {
@@ -143,9 +134,7 @@ public class Products implements Serializable {
     }
 
     public void setCategoryId(Categories categoryId) {
-        Categories oldCategoryId = this.categoryId;
         this.categoryId = categoryId;
-        changeSupport.firePropertyChange("categoryId", oldCategoryId, categoryId);
     }
 
     @Override
@@ -173,12 +162,13 @@ public class Products implements Serializable {
         return "inventoryComponent.Products[ productId=" + productId + " ]";
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
+    @XmlTransient
+    public Collection<EventMaterial> getEventMaterialCollection() {
+        return eventMaterialCollection;
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
+    public void setEventMaterialCollection(Collection<EventMaterial> eventMaterialCollection) {
+        this.eventMaterialCollection = eventMaterialCollection;
     }
     
 }

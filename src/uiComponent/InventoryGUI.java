@@ -8,7 +8,7 @@ package uiComponent;
 
 import inventoryComponent.Brands;
 import inventoryComponent.Categories;
-import inventoryComponent.Products;
+import java.util.List;
 
 /**
  *
@@ -35,14 +35,10 @@ public class InventoryGUI extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("HL_EventosPU").createEntityManager();
-        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT c, p FROM Products p, Categories c ");
+        query1 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT c.category FROM Categories c ORDER BY c.category");
         list1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query1.getResultList());
-        query2 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT c.category FROM Categories c ORDER BY c.category");
+        query2 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT b.brandName FROM Brands b ORDER BY b.brandName");
         list2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query2.getResultList());
-        query3 = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT b.brandName FROM Brands b ORDER BY b.brandName\n");
-        list3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query3.getResultList());
-        productsQuery = java.beans.Beans.isDesignTime() ? null : entityManager1.createQuery("SELECT p FROM Products p");
-        productsList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productsQuery.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -63,36 +59,18 @@ public class InventoryGUI extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1015, 670));
         jPanel1.setPreferredSize(new java.awt.Dimension(1015, 670));
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setBackground(new java.awt.Color(51, 51, 51));
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            getProductsTable(),
+            new String [] {
+                "Categoría","Marca","Modelo","En existencia","Precio de renta","Descripción"
+            }
+        ));
         jTable1.setGridColor(new java.awt.Color(51, 51, 51));
         jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, jTable1);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${categoryId}"));
-        columnBinding.setColumnName("Category Id");
-        columnBinding.setColumnClass(inventoryComponent.Categories.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${brandId}"));
-        columnBinding.setColumnName("Brand Id");
-        columnBinding.setColumnClass(inventoryComponent.Brands.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${brandModel}"));
-        columnBinding.setColumnName("Brand Model");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
-        columnBinding.setColumnName("Description");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${productId}"));
-        columnBinding.setColumnName("Product Id");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantity}"));
-        columnBinding.setColumnName("Quantity");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rentingPrice}"));
-        columnBinding.setColumnName("Renting Price");
-        columnBinding.setColumnClass(java.math.BigDecimal.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -121,7 +99,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list2, jComboBox1);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list1, jComboBox1);
         bindingGroup.addBinding(jComboBoxBinding);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +112,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         jComboBox2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBox2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list3, jComboBox2);
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list2, jComboBox2);
         bindingGroup.addBinding(jComboBoxBinding);
 
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +200,7 @@ public class InventoryGUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        /* try {
             // TODO add your handling code here: returns the principal table with all the products
-            this.jTable1.setModel(new Inventory().refreshInventory());
+            this.jTable1.setModel(new Inventory().refreshInventory());m
         } catch (SQLException ex) {
             Logger.getLogger(InventoryGUI.class.getName()).log(Level.SEVERE, null, ex);
         }*/
@@ -259,6 +237,19 @@ public class InventoryGUI extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    public Object[][] getProductsTable(){
+        List<Object[]> resultList = entityManager1.createNamedQuery("Products.getProductsTable").getResultList();
+        Object[][]table = new Object[resultList.size()][7];
+        int row = 0;
+        
+        for(Object[] t:resultList){
+            for(int col = 0; col < t.length; col++){
+                table[row][col] = t[col];
+            }
+            row++;//continues with the next row of the table 
+        }
+        return table;
+    }
     /**
      * @param args the command line arguments
      */
@@ -274,14 +265,10 @@ public class InventoryGUI extends javax.swing.JFrame {
     public javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.util.List<Products> list1;
-    private java.util.List<Categories> list2;
-    private java.util.List<Brands> list3;
-    private java.util.List<inventoryComponent.Products> productsList;
-    private javax.persistence.Query productsQuery;
+    private java.util.List<Categories> list1;
+    private java.util.List<Brands> list2;
     private javax.persistence.Query query1;
     private javax.persistence.Query query2;
-    private javax.persistence.Query query3;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
