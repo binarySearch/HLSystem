@@ -8,6 +8,7 @@ package uiComponent;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -36,6 +37,7 @@ public class LoginGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("HL_EventosPU").createEntityManager();
         jPanel1 = new javax.swing.JPanel();
         username = new javax.swing.JLabel();
         password = new javax.swing.JLabel();
@@ -171,10 +173,9 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
       
     private void validateUser(String name, String pass){
-        String correctName = "q";
-        String correctPassword = "q";
-        
-        if (name.equals(correctName.toLowerCase()) && pass.equals(correctPassword)) //access granted
+       List<Object> userPass = entityManager1.createNamedQuery("Users.getAccess").setParameter("user", name).setParameter("pass", pass).getResultList();//adds the parameter
+      
+        if (userPass.size() > 0) //access granted
         {
             System.out.println("before pause");
             StarterGUI.Access = true;
@@ -200,6 +201,7 @@ public class LoginGUI extends javax.swing.JFrame {
      */  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
