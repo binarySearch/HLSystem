@@ -8,7 +8,9 @@ package uiComponent;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Locale;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +28,7 @@ public class AdderGUI extends javax.swing.JFrame {
         setProperties();//position and icon image for frame
         setWindowComponents(type);//select type of window to deploy
         this.type=type;
+        JOptionPane.setDefaultLocale(new Locale("es", "ES")); 
     }
     
     private void setWindowComponents(int type){//receives int as a parameter to take a decision of the window type
@@ -54,7 +57,9 @@ public class AdderGUI extends javax.swing.JFrame {
         this.jTextField1.setToolTipText("Nombre completo");
         this.jLabel2.setText("Nombre de usuario");
         this.jTextField2.setToolTipText("Este es el nombre con el que este usuario iniciará sesión");
-        this.jLabel3.setText("Contraseña");
+        jTextField3.setVisible(false);
+        jLabel3.setVisible(false);
+        this.jLabel5.setText("Contraseña");
         this.jLabel4.setText("Agregar a un nuevo usuario");
         
     }
@@ -66,6 +71,8 @@ public class AdderGUI extends javax.swing.JFrame {
         this.jLabel2.setText("Número de teléfono");
         //this.jLabel2.setToolTipText("");
         this.jLabel3.setText("Correo electrónico");
+        jLabel5.setVisible(false);
+        jPasswordField1.setVisible(false);
         this.jLabel4.setText("Agregar a un nuevo cliente");      
     }
     
@@ -76,6 +83,8 @@ public class AdderGUI extends javax.swing.JFrame {
         this.jLabel3.setVisible(false);
         this.jTextField3.setVisible(false);
         this.jLabel4.setText("Agregar nuevo salón");  
+        jLabel5.setVisible(false);
+        jPasswordField1.setVisible(false);
     }
 
     /**
@@ -97,6 +106,8 @@ public class AdderGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -149,27 +160,39 @@ public class AdderGUI extends javax.swing.JFrame {
             }
         });
 
+        jPasswordField1.setBackground(new java.awt.Color(102, 102, 102));
+        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
+        jPasswordField1.setCaretColor(new java.awt.Color(255, 102, 0));
+        jPasswordField1.setSelectedTextColor(new java.awt.Color(255, 102, 0));
+        jPasswordField1.setSelectionColor(new java.awt.Color(204, 204, 204));
+
+        jLabel5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("jLabel5");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addGap(56, 56, 56)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                                    .addComponent(jTextField2))))))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                                .addComponent(jTextField2))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -189,9 +212,13 @@ public class AdderGUI extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addComponent(jButton1)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -223,9 +250,11 @@ public class AdderGUI extends javax.swing.JFrame {
             String param1 = jTextField1.getText();
             String param2 = jTextField2.getText();
             String param3 = jTextField3.getText();
+            String pass = jPasswordField1.getText();
         switch(this.type)
         {
             case 1:
+                validateEntries(this.type);
             break;
                 
             case 2:
@@ -237,8 +266,8 @@ public class AdderGUI extends javax.swing.JFrame {
             default:
                 break;
         }
-                
-                
+                JOptionPane.showMessageDialog(this, "¡Registro exitoso!","Mensaje",JOptionPane.PLAIN_MESSAGE);
+                this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -257,12 +286,32 @@ public class AdderGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    private void validateEntries(int type) {
+        switch(this.type)
+        {
+            case 1:
+                
+            break;
+                
+            case 2:
+            break;
+                
+            case 3:
+            break;
+                
+            default:
+                break;
+        }
+    }
 
     
 }
