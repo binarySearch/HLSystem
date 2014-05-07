@@ -18,9 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class NewEventGUI extends javax.swing.JFrame {
 
-    DefaultTableModel model = new DefaultTableModel();
-    DefaultTableModel model2 = new DefaultTableModel();
-    
+    Object[][] data = new Object[1][4];
+    String[] columnNames = {"Categoría","Marca","Modelo","Cantidad a rentar"};
     /**
      * Creates new form Inventory
      */
@@ -30,9 +29,6 @@ public class NewEventGUI extends javax.swing.JFrame {
         buttonGroup5.add(jRadioButton2);
         hideComponents();
         JOptionPane.setDefaultLocale(new Locale("es", "ES")); 
-        
-        jTable2 = new JTable(model);
-        jTable1 = new JTable(model2);
     }
     
     private void hideComponents(){
@@ -86,9 +82,6 @@ public class NewEventGUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
@@ -233,9 +226,9 @@ public class NewEventGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -382,36 +375,6 @@ public class NewEventGUI extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Equipo seleccionado para este evento");
 
-        jLabel9.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Inventario de HL");
-
-        jTable1.setBackground(new java.awt.Color(51, 51, 51));
-        jTable1.setFont(jTable1.getFont().deriveFont(jTable1.getFont().getSize()+3f));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Categoría", "Marca", "Modelo", "Existencia"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setGridColor(new java.awt.Color(153, 153, 153));
-        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 102, 0));
-        jScrollPane2.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
         jButton6.setText("Anterior");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -424,16 +387,16 @@ public class NewEventGUI extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1133, Short.MAX_VALUE)
-            .addComponent(jScrollPane2)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 544, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,11 +404,7 @@ public class NewEventGUI extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -572,18 +531,39 @@ public class NewEventGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+
+        String category = jComboBox6.getSelectedItem().toString();
+        String selectedProduct = jComboBox4.getSelectedItem().toString();
+        String selectedQuantity = jComboBox5.getSelectedItem().toString();
+
+        
         jPanel2.setVisible(!false);
         //jcombo4 is product
         //jcombo5 is quantity
         //jtable2 is the added products table
 
-        String category = jComboBox6.getSelectedItem().toString();
-        String selectedProduct = jComboBox4.getSelectedItem().toString();
-        int selectedQuantity = Integer.parseInt(jComboBox5.getSelectedItem().toString());
-        
-        Object[] ob = {category, "x",selectedProduct, selectedQuantity};
-        model.addRow(ob);
-        
+        if(data.length<=1)
+        {
+            Object[][] temp = new Object[data.length+1][4];
+            temp[0][0] = category;
+            temp[0][1] = selectedProduct;
+            temp[0][2] = selectedQuantity;
+            data=temp;
+            jTable2.setModel(new DefaultTableModel(data,columnNames));
+        }
+        else
+        {
+            Object[][] temp = new Object[data.length+1][4];
+            for (int i=0;i<data.length;i++) {
+                System.arraycopy(data[i], 0, temp[i], 0, 2);
+            }
+            temp[data.length][0] = category;
+            temp[data.length][1] = selectedProduct;
+            temp[data.length][2] = selectedQuantity;
+            data=temp;
+            jTable2.setModel(new DefaultTableModel(data,columnNames));
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
@@ -671,17 +651,14 @@ public class NewEventGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
