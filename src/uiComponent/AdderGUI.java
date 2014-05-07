@@ -300,6 +300,7 @@ public class AdderGUI extends javax.swing.JFrame {
         {
             case 1:
                 
+                
             break;
                 
             case 2:
